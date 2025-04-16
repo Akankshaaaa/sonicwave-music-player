@@ -332,18 +332,63 @@ const MiniPlayer: React.FC = () => {
           width: 140,
           flexShrink: 0
         }}>
-          <IconButton onClick={toggleMute} size="small">
+          <IconButton 
+            onClick={toggleMute} 
+            size="small"
+            onTouchEnd={(e) => {
+              e.stopPropagation();
+              toggleMute();
+            }}
+          >
             {volume === 0 ? <VolumeOff /> : <VolumeUp />}
           </IconButton>
           
           <Slider
             value={volume}
             onChange={handleVolumeChange}
+            onChangeCommitted={(_, value) => setVolume(value as number)}
             min={0}
             max={1}
             step={0.01}
             size="small"
-            sx={{ mx: 1 }}
+            sx={{ 
+              mx: 1,
+              // Make the touch target larger on mobile
+              height: 8, // Taller track for better touch targets
+              '& .MuiSlider-thumb': {
+                width: 14,
+                height: 14,
+                '&:hover, &.Mui-active': {
+                  boxShadow: '0px 0px 0px 8px rgba(108, 99, 255, 0.16)',
+                  width: 18,
+                  height: 18,
+                },
+              },
+              '& .MuiSlider-rail': {
+                height: 8, // Taller rail for better touch target
+                borderRadius: 4,
+              },
+              '& .MuiSlider-track': {
+                height: 8, // Taller track for better touch target
+                borderRadius: 4,
+              },
+              // Improve touch area
+              '@media (pointer: coarse)': {
+                padding: '12px 0',
+              },
+            }}
+            onClick={(e) => e.stopPropagation()}
+            onMouseDown={(e) => e.stopPropagation()}
+            onTouchStart={(e) => {
+              e.stopPropagation();
+              // Make sure this touch is exclusively handled by the slider
+              document.body.style.overflow = 'hidden';
+            }}
+            onTouchEnd={() => {
+              // Restore scrolling when touch ends
+              document.body.style.overflow = '';
+            }}
+            aria-label="Volume"
           />
         </Box>
       </Box>

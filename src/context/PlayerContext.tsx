@@ -114,8 +114,8 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children, initia
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [volume]);
-
+  }, []);
+  
   // Handle audio playback
   useEffect(() => {
     if (!audioRef.current || !currentSong) return;
@@ -292,15 +292,52 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children, initia
   };
 
   const handleSetVolume = (value: number) => {
-    setVolume(value);
+    // Clamp the value between 0 and 1 to ensure valid volume
+    const clampedValue = Math.max(0, Math.min(1, value));
+    
+    // Update the audio element volume immediately to ensure responsive volume control
+    if (audioRef.current) {
+      // For iOS, need to unlock audio first with user interaction
+      const unlockIOSAudio = () => {
+        if (audioRef.current) {
+          // Create short silent sound to unlock audio
+          audioRef.current.volume = 0;
+          audioRef.current.play().then(() => {
+            // Once unlocked, we can set the actual volume and pause if needed
+            audioRef.current!.pause();
+            audioRef.current!.volume = clampedValue;
+            if (isPlaying) {
+              audioRef.current!.play().catch(err => console.error('Error playing audio:', err));
+            }
+          }).catch(err => {
+            console.warn('Could not unlock iOS audio:', err);
+            // Still set the volume
+            if (audioRef.current) {
+              audioRef.current.volume = clampedValue;
+            }
+          });
+        }
+      };
+      
+      // Check if we need to handle iOS specifically
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream) {
+        unlockIOSAudio();
+      } else {
+        // For other devices, just set the volume directly
+        audioRef.current.volume = clampedValue;
+      }
+    }
+    
+    // Update the state after the direct manipulation
+    setVolume(clampedValue);
   };
 
   const toggleMute = () => {
     if (volume > 0) {
       setPreviousVolume(volume);
-      setVolume(0);
+      handleSetVolume(0); // Use the enhanced volume setter
     } else {
-      setVolume(previousVolume);
+      handleSetVolume(previousVolume); // Use the enhanced volume setter
     }
   };
 
