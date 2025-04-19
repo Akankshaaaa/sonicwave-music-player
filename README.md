@@ -1,6 +1,7 @@
 # SonicWave - Modern Music Player
 
 SonicWave is a sleek, modern music player with a beautiful UI and smooth animations. It's designed to provide an exceptional music listening experience across all screen sizes.
+![Alt text](images/sonicwave.png)
 
 ## Features
 
@@ -31,7 +32,7 @@ SonicWave is a sleek, modern music player with a beautiful UI and smooth animati
 
 1. Clone the repository
    ```
-   git clone https://github.com/yourusername/sonicwave.git
+   git clone https://github.com/Akankshaaaa/sonicwave.git
    cd sonicwave
    ```
 
@@ -57,6 +58,7 @@ src/
 │   ├── Albums/         # Album related components
 │   ├── Artists/        # Artist related components
 │   ├── Layout/         # Layout components
+|   ├── Home/           # Home Page components
 │   ├── Library/        # Library components  
 │   └── Player/         # Player components
 ├── context/            # React context for state management
@@ -75,6 +77,8 @@ src/
 - **Albums**: View all albums and click to see details
 - **Artists**: Browse artists and their albums
 - **Player**: Full-screen player with album art and controls
+- **Favorites**: View all the songs that you "heart"
+
 
 ## Customization
 
@@ -83,21 +87,3 @@ You can customize the app by:
 1. Adding your own songs to the `/public/audio` directory
 2. Updating the song data in `src/data/songs.ts`
 3. Modifying the theme in `src/theme/theme.ts`
-
-## Roadmap
-
-- [ ] Add playlist functionality
-- [ ] Implement user authentication
-- [ ] Add music visualization
-- [ ] Support for more audio formats
-- [ ] Mobile app with React Native
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- Album artwork from Wikipedia
-- Sample music from Coldplay
-- Icons from Material UI Icons
