@@ -1,7 +1,7 @@
 # SonicWave - Modern Music Player
 
 SonicWave is a sleek, modern music player with a beautiful UI and smooth animations. It's designed to provide an exceptional music listening experience across all screen sizes.
-![Alt text](images/sonicwave.png)
+[![SonicWave Homepage](images/sonicwave-min.png)](https://sonicwave-music-player.vercel.app/)
 
 ## Features
 
