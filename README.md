@@ -50,25 +50,6 @@ SonicWave is a sleek, modern music player with a beautiful UI and smooth animati
 
 5. Open [http://localhost:3000](http://localhost:3000) to view the app in your browser
 
-## Project Structure
-
-```
-src/
-├── components/         # Reusable UI components
-│   ├── Albums/         # Album related components
-│   ├── Artists/        # Artist related components
-│   ├── Layout/         # Layout components
-|   ├── Home/           # Home Page components
-│   ├── Library/        # Library components  
-│   └── Player/         # Player components
-├── context/            # React context for state management
-├── data/               # Song, album, and artist data
-├── models/             # TypeScript interfaces
-├── pages/              # Page components
-├── theme/              # Theme configuration
-├── App.tsx             # Main App component
-└── index.tsx           # Entry point
-```
 
 ## Usage
 
