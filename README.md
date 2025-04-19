@@ -33,7 +33,7 @@ SonicWave is a sleek, modern music player with a beautiful UI and smooth animati
 1. Clone the repository
    ```
    git clone https://github.com/Akankshaaaa/sonicwave-music-player.git
-   cd sonicwave
+   cd sonicwave-music-player
    ```
 
 2. Install dependencies
